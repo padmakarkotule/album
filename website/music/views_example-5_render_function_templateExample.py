@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.http import Http404
 # Import template loader 
 from django.shortcuts import render
 # Import Album from models for conecting databasee
@@ -19,12 +18,5 @@ def index(request):
     #Following line renders, index.html and pass context (passes dictionary data) . 
     #return HttpResponse(template.render(context, request))
     return render(request, 'music/index.html', context)
-    #Instead of context you can directly write code e.g. {'all_albums': all_albums}
-    #E.g. return render(request, 'music/index.html', {'all_albums': all_albums}  )
 def detail(request, album_id):
-    #Example of Http404 Error
-    try:
-        album = Album.objects.get(pk=album_id)
-    except Album.DoesNotExist:
-        raise Http404(" Album does not exit")
-    return render(request, 'music/detail.html', {'album': album})
+    return HttpResponse("<h2> Details for Album id:" + str(album_id) +  "</h2>")
