@@ -1,10 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+#from django.http import HttpResponse
 from django.http import Http404
 # Import template loader 
-from django.shortcuts import render
 # Import Album from models for conecting databasee
-from .models import Album
+from .models import Album, Song
 # Create your views here.
 
 def index(request):
@@ -25,6 +24,15 @@ def detail(request, album_id):
     #Example of Http404 Error
     try:
         album = Album.objects.get(pk=album_id)
+        
     except Album.DoesNotExist:
-        raise Http404(" Album does not exit")
+        # raise Http404(" Album does not exit ")
+        raise Http404("Album does not exist") 
+        #album = get_object_or_404(Album, pk=album_id)
     return render(request, 'music/detail.html', {'album': album})
+
+#def page_not_found(request):
+#    return render(request, 'music/404.html')
+
+def custom_404(request):
+    return render(request, 'musci/404.html', {}, status=404)

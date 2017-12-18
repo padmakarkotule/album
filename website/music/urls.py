@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import path
 from os import name
 
+app_name = 'music'
 urlpatterns = [
     # Home page for /music app
     url('^$', views.index, name='index'),

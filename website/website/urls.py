@@ -13,10 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, handler404
 from django.contrib import admin
+from django.http import Http404
+
+#handler404 = 'music.views.page_not_found'
+handler404 = 'music.views.custom_404'
 
 urlpatterns = [
     url('^admin/', admin.site.urls),
     url(r'^music/', include('music.urls')),
+    
 ]
