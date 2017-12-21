@@ -4,7 +4,6 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 # Import Album from models for conecting databasee
 from .models import Album, Song
 from django.template import RequestContext
-
 # Create your views here.
 
 def index(request):
@@ -23,30 +22,13 @@ def index(request):
     #E.g. return render(request, 'music/index.html', {'all_albums': all_albums}  )
 def detail(request, album_id):
     #Example of Http404 Error
-    #album = Album.objects.get(pk=album_id)
-    try:  
-        album = get_object_or_404(Album, pk=album_id)     
-    
-        return render(request, 'music/detail.html', {'album': album})
-    except Exception as e:
-        return render(request, 'music/404.html')
-        
-        
-def favorite(request, album_id):
-    album = get_object_or_404(Album, pk=album_id)
-    try:
-        selected_song = album.song_set.get(pk=request.POST['song'])
-    except (KeyError, Song.DoesNotExist):
-        return render(request, 'music/detail.html', {
-            'album': album,
-            'error_message': "You didn't selected valid song",
-            })
-    else:
-        selected_song.is_favorite = True
-        selected_song.save()
+    #album = Album.objects.get(pk=album_id)  
+    album = get_object_or_404(Album, pk=album_id)     
     return render(request, 'music/detail.html', {'album': album})
 
-# --------------------Error handling------------------#############
+#def page_not_found(request):
+#    return render(request, 'music/404.html')
+
 #def custom_404(request):
 #    return render(request, 'musci/404.html', {}, status=404)
 

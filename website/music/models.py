@@ -26,6 +26,7 @@ class Song(models.Model):
     file_type = models.CharField(max_length=10, default=None)
     song_title = models.CharField(max_length=250)
     audio_file = models.FileField(default='')
+    is_favorite = models.BooleanField(default=False)
     #is_favorite = models.BooleanField(default=False)
 
     def __str__(self):
