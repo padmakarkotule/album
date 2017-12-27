@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Permission, User
 from django.db import models
 from django.template.defaultfilters import default
-from django.urls import reverse
+
 
 class Album(models.Model):
     #user = models.ForeignKey(User, default=1)
@@ -17,10 +17,6 @@ class Album(models.Model):
     #<QuerySet [<Album: Object>, <Album: Object>]>
     #It will only Alunm objects and nothing else. To get data you need to add following functions.
     #E.g. in models.py e.g. add following line
-    
-    def get_absolute_url(self):
-        return reverse('music:details', kwargs={'pk': self.pk})
-    
 
     def __str__(self):
         return self.album_title + ' - ' + self.artist

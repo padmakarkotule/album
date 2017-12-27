@@ -15,15 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 #from django.http import Http404
 #from django.shortcuts import render
 
 #handler404 = 'music.views.page_not_found'
-handler404 = 'music.views.handler404'
-handler500 = 'music.views.handler500'
+#handler404 = 'music.views.handler404'
+#handler500 = 'music.views.handler500'
 
 urlpatterns = [
     url('^admin/', admin.site.urls),
     url(r'^music/', include('music.urls', namespace='music')),
     
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+
